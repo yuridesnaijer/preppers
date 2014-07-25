@@ -2,6 +2,7 @@ package com.morgenmiddag.prepper.ui;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -16,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.morgenmiddag.prepper.screens.GameScreen;
 
-public class TestUI extends Actor {
+public class TestUI extends Actor{
 
 	public Table table;
 	private List list;

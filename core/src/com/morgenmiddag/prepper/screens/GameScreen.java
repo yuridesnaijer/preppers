@@ -14,14 +14,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.morgenmiddag.prepper.entities.House;
-import com.morgenmiddag.prepper.ui.TestUI;
 
 public class GameScreen implements Screen {
 
 	private Stage stage;
 	private Table table;
-
-	private TestUI houseMenu;
+	private TextureAtlas atlas;
+	private Skin skin;
+	private List list;
+	private ScrollPane scrollPane;
 	
 	@Override
 	public void render(float delta) {
@@ -41,13 +42,29 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void show() {		
-		stage = new Stage();
+stage = new Stage();
 		
 		Gdx.input.setInputProcessor(stage);
 		
-		houseMenu = new TestUI();
+		atlas = new TextureAtlas("ui/atlas.pack");
+		skin = new Skin(Gdx.files.internal("ui/menuSkin.json"), atlas);
 		
-		stage.addActor(houseMenu);
+		table = new Table(skin);
+		table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		
+		//set debug lines
+		table.debug();
+		
+		list = new List<String>(skin);
+		list.setItems(new String[] {"test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test"});
+		
+		scrollPane = new ScrollPane(list, skin);
+		
+		table.add().width(table.getWidth() / 3);
+		table.add().width(table.getWidth() / 3).row();
+		table.add(scrollPane).expandY().left();
+		
+		stage.addActor(table);
 	}
 
 	@Override

@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.utils.Array;
 import com.morgenmiddag.prepper.ui.TestUI;
 
 public class House extends Actor{
@@ -36,9 +35,11 @@ public class House extends Actor{
             		menuOpen = true;
             		houseMenu = new TestUI();
             		getStage().addActor(houseMenu);
+            		System.out.println("open menu");
             	} else {
             		houseMenu.remove();
             		menuOpen = false;
+            		System.out.println("close menu");
             	}
                 
                 return true;

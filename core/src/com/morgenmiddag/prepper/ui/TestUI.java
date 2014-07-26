@@ -1,9 +1,6 @@
 package com.morgenmiddag.prepper.ui;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -15,16 +12,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.morgenmiddag.prepper.screens.GameScreen;
 
 public class TestUI extends Actor{
 
-	public Table table;
+	private Table table, buttonHolder;
 	private List list;
 	private TextureAtlas atlas;
 	private Skin skin;
 	private ScrollPane scrollPane;
-	private TextButton play, back;
+	private CustomButton play, back;
 	
 	private Sprite sprite;
 	
@@ -38,14 +34,23 @@ public class TestUI extends Actor{
 		//set debug lines
 		table.debug();
 		
-		list = new List<String>(skin);
-		list.setItems(new String[] {"test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test"});
+//		list = new List<String>(skin);
+//		list.setItems(new String[] {"test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test"});
 		
-		scrollPane = new ScrollPane(list, skin);
+		buttonHolder = new Table();
 		
-		table.add().width(table.getWidth() / 3);
-		table.add().width(table.getWidth() / 3).row();
-		table.add(scrollPane).expandY().left();
+		play = new CustomButton("Play jajajajajajajajajajajajajajajajajaja", skin);
+		back = new CustomButton("Heeeeeeeeeeeeeeele lange tekst", skin);
+			
+		buttonHolder.add(play);
+		buttonHolder.add(back);
+		
+		scrollPane = new ScrollPane(buttonHolder, skin);
+		table.add(scrollPane);
+	}
+	
+	public Table getTable(){
+		return table;
 	}
 	
 	@Override

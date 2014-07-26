@@ -35,9 +35,11 @@ public class House extends Actor{
             		menuOpen = true;
             		houseMenu = new TestUI();
             		getStage().addActor(houseMenu);
+            		getStage().addActor(houseMenu.getTable());
             		System.out.println("open menu");
             	} else {
             		houseMenu.remove();
+            		houseMenu.getTable().remove();
             		menuOpen = false;
             		System.out.println("close menu");
             	}
@@ -49,6 +51,7 @@ public class House extends Actor{
 	
 	@Override
     public void draw(Batch batch, float alpha){
+		batch.setColor(1,1,1,1);
         batch.draw(sprite, getX(), getY());
     }
 }

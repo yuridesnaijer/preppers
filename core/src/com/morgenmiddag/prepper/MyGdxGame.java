@@ -6,10 +6,13 @@ import com.morgenmiddag.prepper.screens.GameScreen;
 public class MyGdxGame extends Game {
 	public static final String 	TITLE = "Preppers",
 								VERSION = "0.0.0.1";
+	private Player player;
 
 	@Override
 	public void create () {
-		setScreen(new GameScreen());
+		
+		player = new Player();
+		setScreen(new GameScreen(player));
 	}
 	
 	@Override

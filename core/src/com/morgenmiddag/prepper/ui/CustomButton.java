@@ -19,14 +19,6 @@ public class CustomButton extends TextButton{
             }
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
             	//((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen());
-            	Gdx.app.exit();
-            }
-            
-            @Override
-            public void exit(InputEvent event, float x, float y, int pointer,
-            		Actor toActor) {
-            	// TODO Auto-generated method stub
-            	super.exit(event, x, y, pointer, toActor);
             }
             
             @Override

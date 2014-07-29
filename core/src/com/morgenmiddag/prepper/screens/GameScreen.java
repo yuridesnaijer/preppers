@@ -15,7 +15,7 @@ import com.morgenmiddag.prepper.ui.Hud;
 public class GameScreen implements Screen {
 
 	private Stage stage, hud;
-	private House house;
+	private House house, house2;
 	private Player player;
 	
 	private TextureAtlas atlas;
@@ -51,8 +51,10 @@ public class GameScreen implements Screen {
 		
 		Gdx.input.setInputProcessor(stage);	
 		
-		house = new House();
-		stage.addActor(house);		
+		house = new House(50, 50, 400);
+		house2 = new House(250, 250, 500);
+		stage.addActor(house);	
+		stage.addActor(house2);
 
 		hud = new Hud(player);	
 		

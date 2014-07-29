@@ -8,44 +8,59 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.morgenmiddag.prepper.ui.TestUI;
+import com.morgenmiddag.prepper.ui.HousePopup;
 
 public class House extends Actor{
 
 	private Sprite sprite;
 	private Boolean menuOpen = false;
+	private HousePopup housePopup;
 	
-	private TestUI houseMenu;
+	private int hitPoints;
+	private int level = 1;
 	
-	public House(){
+	private House house;
+	
+	public House(int x, int y, int hp){
+		
+		house = this;
 		
 		System.out.println("create House");
+		
+		setHitPoints(hp);
 		
 		sprite = new Sprite(new Texture(Gdx.files.internal("house.png")));
 		sprite.setSize(50, 50);
 		sprite.setRegionHeight(50);
 		sprite.setRegionWidth(50);
 		
-		setBounds(Gdx.graphics.getHeight() /2, Gdx.graphics.getWidth()/2, sprite.getRegionHeight(), sprite.getRegionWidth());
+		setBounds(x, y, sprite.getRegionHeight(), sprite.getRegionWidth());
 		setTouchable(Touchable.enabled);
 		
 		this.addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons){
             	if(menuOpen == false){
             		menuOpen = true;
-            		houseMenu = new TestUI();
-            		getStage().addActor(houseMenu);
-            		getStage().addActor(houseMenu.getTable());
+            		housePopup = new HousePopup(house);
+            		getStage().addActor(housePopup);
+            		getStage().addActor(housePopup.getTable());
             		System.out.println("open menu");
             	} else {
-            		houseMenu.remove();
-            		houseMenu.getTable().remove();
+            		housePopup.remove();
+            		housePopup.getTable().remove();
             		menuOpen = false;
             		System.out.println("close menu");
             	}
                 
                 return true;
             }
+            
+            public void touchDragged (InputEvent event, float x, float y, int pointer) {
+	            // example code below for origin and position
+	            house.setPosition(Gdx.input.getX(), y);
+	            System.out.println("touchdragged" + x + ", " + y);
+
+	        }
         });
 	}
 	
@@ -54,4 +69,20 @@ public class House extends Actor{
 		batch.setColor(1,1,1,1);
         batch.draw(sprite, getX(), getY());
     }
+
+	public int getHitPoints() {
+		return hitPoints;
+	}
+
+	public void setHitPoints(int hitPoints) {
+		this.hitPoints = hitPoints;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
 }

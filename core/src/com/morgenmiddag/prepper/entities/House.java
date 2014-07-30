@@ -4,10 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.morgenmiddag.prepper.MyGdxGame;
 import com.morgenmiddag.prepper.ui.HousePopup;
 
 public class House extends Actor{
@@ -20,7 +22,9 @@ public class House extends Actor{
 	private int level = 1;
 	
 	private House house;
-	
+
+    public Vector2 draggOffset = new Vector2();
+
 	public House(int x, int y, int hp){
 		
 		house = this;
@@ -33,13 +37,19 @@ public class House extends Actor{
 		sprite.setSize(50, 50);
 		sprite.setRegionHeight(50);
 		sprite.setRegionWidth(50);
-		
-		setBounds(x, y, sprite.getRegionHeight(), sprite.getRegionWidth());
+
+		setBounds(x, y, sprite.getRegionWidth(), sprite.getRegionHeight());
 		setTouchable(Touchable.enabled);
 		
 		this.addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons){
-            	if(menuOpen == false){
+                Gdx.app.log(MyGdxGame.TITLE, Float.toString((Gdx.input.getX() - getX())));
+
+                //set draggoffset when first clicked on house, this will be used to prevent the house from jumping to its sprite's left corner
+                draggOffset.x = Gdx.input.getX() - getX();
+                draggOffset.y = Gdx.input.getY() - getY();
+
+            	if(!menuOpen){
             		menuOpen = true;
             		housePopup = new HousePopup(house);
             		getStage().addActor(housePopup);
@@ -57,8 +67,12 @@ public class House extends Actor{
             
             public void touchDragged (InputEvent event, float x, float y, int pointer) {
 	            // example code below for origin and position
-	            house.setPosition(Gdx.input.getX(), y);
-	            System.out.println("touchdragged" + x + ", " + y);
+
+//                (getX()+x)
+//                - (Gdx.input.getX() - getX()
+
+	            house.setPosition((getX()+x) - draggOffset.x, getY()+y);
+//	            System.out.println("touchdragged " + x + ", " + y);
 
 	        }
         });

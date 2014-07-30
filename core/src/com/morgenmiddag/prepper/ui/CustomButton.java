@@ -23,8 +23,7 @@ public class CustomButton extends TextButton{
             
             @Override
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
-            	// TODO Auto-generated method stub            	
-            	super.touchDragged(event, x, y, pointer);
+//            	super.touchDragged(event, x, y, pointer);
             }
 		});
 		

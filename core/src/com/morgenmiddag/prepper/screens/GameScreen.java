@@ -2,6 +2,7 @@ package com.morgenmiddag.prepper.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
@@ -34,6 +35,7 @@ public class GameScreen implements Screen {
 
     private Random random;
     private Vector2 enemyStartPosition;
+    private Color enemyenemyDebugColor;
 
     public GameScreen(Player player){
 		this.player = player;
@@ -59,7 +61,7 @@ public class GameScreen implements Screen {
             enemyStartPosition = new Vector2(-50, 100);
 
             getRandomPath();
-            stage.addActor(new Enemy(enemyStartPosition, randomPath));
+            stage.addActor(new Enemy(enemyStartPosition, randomPath, enemyenemyDebugColor));
 
             timer = 0;
         }
@@ -89,7 +91,7 @@ public class GameScreen implements Screen {
         createEnemyPaths();
         getRandomPath();
 
-        enemy = new Enemy(enemyStartPosition, randomPath);
+        enemy = new Enemy(enemyStartPosition, randomPath, enemyenemyDebugColor);
 
 		stage.addActor(house);	
 		stage.addActor(house2);
@@ -123,12 +125,15 @@ public class GameScreen implements Screen {
     private void getRandomPath(){
         switch (random.nextInt(3)){
             case 0:
+                enemyenemyDebugColor = Color.GREEN;
                 randomPath = enemyPath1;
                 break;
             case 1:
+                enemyenemyDebugColor = Color.ORANGE;
                 randomPath = enemyPath2;
                 break;
             case 2:
+                enemyenemyDebugColor = Color.MAGENTA;
                 randomPath = enemyPath3;
                 break;
         }

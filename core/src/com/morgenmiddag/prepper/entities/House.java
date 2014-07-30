@@ -16,7 +16,12 @@ public class House extends Actor{
 
 	private Sprite sprite;
 	private Boolean menuOpen = false;
-	private HousePopup housePopup;
+
+    private HousePopup housePopup;
+
+    public HousePopup getHousePopup() {
+        return housePopup;
+    }
 	
 	private int hitPoints;
 	private int level = 1;
@@ -43,11 +48,11 @@ public class House extends Actor{
 		
 		this.addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons){
-                Gdx.app.log(MyGdxGame.TITLE, Float.toString((Gdx.input.getX() - getX())));
+                Gdx.app.log(MyGdxGame.TITLE, Float.toString((Gdx.graphics.getHeight() - Gdx.input.getY()) - getY()));
 
                 //set draggoffset when first clicked on house, this will be used to prevent the house from jumping to its sprite's left corner
                 draggOffset.x = Gdx.input.getX() - getX();
-                draggOffset.y = Gdx.input.getY() - getY();
+                draggOffset.y = (Gdx.graphics.getHeight() - Gdx.input.getY()) - getY();
 
             	if(!menuOpen){
             		menuOpen = true;
@@ -68,10 +73,7 @@ public class House extends Actor{
             public void touchDragged (InputEvent event, float x, float y, int pointer) {
 	            // example code below for origin and position
 
-//                (getX()+x)
-//                - (Gdx.input.getX() - getX()
-
-	            house.setPosition((getX()+x) - draggOffset.x, getY()+y);
+	            house.setPosition((getX()+x) - draggOffset.x, getY()+y - draggOffset.y);
 //	            System.out.println("touchdragged " + x + ", " + y);
 
 	        }
